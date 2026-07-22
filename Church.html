@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>光之教堂 - YArch-Gallery</title>
+    <style>
+        /* =========================================
+           全局样式设置
+           ========================================= */
+        :root {
+            --bg-color: #ffffff;
+            --text-main: #1a1a1a;
+            --text-muted: #737373;
+            --border-color: #e5e5e5;
+            --font-stack: 'Helvetica Neue', Helvetica, Arial, 'PingFang SC', 'Microsoft YaHei', sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-stack);
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.8;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.3s ease;
+        }
+
+        img {
+            max-width: 100%;
+            display: block;
+        }
+
+        /* =========================================
+           导航栏
+           ========================================= */
+        header {
+            padding: 1.5rem 2rem;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: var(--bg-color);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            font-size: 1.25rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: var(--text-muted);
+        }
+
+        .nav-links a:hover {
+            color: var(--text-main);
+        }
+
+        /* =========================================
+           详情页头图与标题区
+           ========================================= */
+        .article-header {
+            max-width: 1000px;
+            margin: 4rem auto 2rem;
+            padding: 0 2rem;
+            text-align: center;
+        }
+
+        .article-title {
+            font-size: 2.5rem;
+            font-weight: 400;
+            margin-bottom: 1rem;
+            letter-spacing: 2px;
+        }
+
+        .article-meta {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .hero-image-container {
+            max-width: 1200px;
+            margin: 0 auto 4rem;
+            padding: 0 2rem;
+        }
+
+        .hero-image {
+            width: 100%;
+            aspect-ratio: 21 / 9;
+            object-fit: cover;
+            background-color: #f5f5f5;
+        }
+
+        /* =========================================
+           正文排版区
+           ========================================= */
+        .article-content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .article-content h2 {
+            font-size: 1.5rem;
+            font-weight: 500;
+            margin: 3rem 0 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid var(--text-main);
+        }
+
+        .article-content p {
+            margin-bottom: 1.5rem;
+            color: #333;
+            text-align: justify;
+        }
+        
+        /* 核心评价引用样式 */
+        blockquote {
+            font-size: 1.25rem;
+            font-weight: 300;
+            font-style: italic;
+            color: var(--text-main);
+            border-left: 3px solid var(--text-main);
+            padding-left: 1.5rem;
+            margin: 3rem 0;
+            line-height: 1.6;
+        }
+
+        /* 图文混排模块 */
+        .mixed-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin: 3rem 0;
+            align-items: center;
+        }
+
+        .mixed-layout img {
+            width: 100%;
+            aspect-ratio: 4 / 3;
+            object-fit: cover;
+        }
+
+        .image-caption {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            text-align: center;
+            margin-top: 0.5rem;
+            font-style: italic;
+        }
+
+        /* =========================================
+           底部操作区
+           ========================================= */
+        .action-area {
+            max-width: 800px;
+            margin: 5rem auto;
+            padding: 0 2rem;
+            text-align: center;
+        }
+
+        .btn-back {
+            display: inline-block;
+            padding: 0.8rem 2.5rem;
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-main);
+            border: 1px solid var(--text-main);
+            background-color: transparent;
+        }
+
+        .btn-back:hover {
+            background-color: var(--text-main);
+            color: var(--bg-color);
+        }
+
+        /* =========================================
+           页脚
+           ========================================= */
+        footer {
+            padding: 3rem 2rem;
+            text-align: center;
+            border-top: 1px solid var(--border-color);
+            color: var(--text-muted);
+            font-size: 0.85rem;
+        }
+
+        /* =========================================
+           响应式设计
+           ========================================= */
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                gap: 1rem;
+                position: static;
+            }
+            
+            .article-title {
+                font-size: 1.8rem;
+            }
+
+            .hero-image {
+                aspect-ratio: 16 / 9;
+            }
+
+            .mixed-layout {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+            
+            blockquote {
+                font-size: 1.1rem;
+                margin: 2rem 0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 导航栏 -->
+    <header>
+        <a href="index.html" class="logo">YArch-Gallery</a>
+        <ul class="nav-links">
+            <li><a href="index.html">首页</a></li>
+            <li><a href="#">关于</a></li>
+            <li><a href="index.html">案例列表</a></li>
+        </ul>
+    </header>
+
+    <main>
+        <!-- 标题与基础信息 -->
+        <section class="article-header">
+            <h1 class="article-title">光之教堂 (Church of the Light)</h1>
+            <p class="article-meta">安藤忠雄 | 1989 | 日本，大阪府茨木市 | 清水混凝土、木材、玻璃</p>
+        </section>
+
+        <!-- 满宽大尺寸实景图占位 -->
+        <div class="hero-image-container">
+            <img src="https://images.unsplash.com/photo-1542844208-89c09531bcf9?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80" alt="光之教堂内景" class="hero-image">
+        </div>
+
+        <!-- 正文排版区 -->
+        <article class="article-content">
+            
+            <h2>设计背景与理念</h2>
+            <p>在极为有限的预算和逼仄的场地条件下，安藤忠雄试图剥离传统宗教建筑中一切非必要的装饰与符号，将空间回归到最原始、最纯粹的几何形态。他的设计理念在于“用最少的物质，去唤醒最丰富的精神”，为现代人在喧嚣的都市边缘，提供一处能够与内心对话的静思庇护所。</p>
+
+            <h2>光影与空间的巧妙运用</h2>
+            
+            <!-- 图文混排模块 -->
+            <div class="mixed-layout">
+                <div>
+                    <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="墙面细节">
+                    <p class="image-caption">清水混凝土与光影的交织</p>
+                </div>
+                <div>
+                    <p>整个建筑是一个封闭的暗色混凝土盒子，步入其中，视觉的绝对焦点是被切开的墙面——一道巨大的十字形缝隙。在这里，安藤忠雄将“光”变成了一种极具重量感和实体感的建筑材料。</p>
+                    <p>当室外的自然光猛烈地穿透这道十字切口，幽暗的室内瞬间被神圣的光辉劈开。随着一天中太阳轨迹的推移，光影在粗粝的清水混凝土墙面和深色的木地板上缓缓流转，赋予了冷峻的空间以生命和呼吸。</p>
+                </div>
+            </div>
+
+            <h2>核心评价</h2>
+            <blockquote>
+                “以极简的物质实体，盛放了极致的精神之光。”
+            </blockquote>
+
+        </article>
+
+        <!-- 底部返回按钮 -->
+        <div class="action-area">
+            <a href="index.html" class="btn-back">返回主页</a>
+        </div>
+    </main>
+
+    <!-- 页脚 -->
+    <footer>
+        <p>&copy; 2024 YArch-Gallery. All rights reserved.</p>
+    </footer>
+
+</body>
+</html>
